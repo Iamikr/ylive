@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "154049945766",
+    "project_id": "skincareomr-57f74",
+    "storage_bucket": "skincareomr-57f74.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:154049945766:android:818bc6a41d3d45e9959467",
+        "android_client_info": {
+          "package_name": "com.omer.skincare.skincare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "154049945766-v5kredpjs36gp947eqf4qt6ihg615mfg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.omer.skincare.skincare",
+            "certificate_hash": "0e9493b33413ef3cbe9e279c394de7b433a25cb3"
+          }
+        },
+        {
+          "client_id": "154049945766-h4ckpo7hajf3ul6j119e064qeucmhl2d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACHWOYgDzD7IdmddAl_e7SRuf5hRhOvUc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "154049945766-h4ckpo7hajf3ul6j119e064qeucmhl2d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

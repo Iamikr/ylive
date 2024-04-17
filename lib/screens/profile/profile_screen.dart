@@ -2,19 +2,27 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
 import 'package:skincare/screens/profile/profile_controller.dart';
 
 import '../../core/utils/colors.dart';
 import '../../core/utils/styles.dart';
+import '../../models/api_response.dart';
+import '../../services/authentication_service.dart';
 import '../auth/login/login_screen.dart';
 
 
 
 class ProfileScreen extends StatelessWidget {
 
+  AuthenticationService get authenticationService =>
+      GetIt.I<AuthenticationService>();
+
   final ProfileController controller = Get.put(ProfileController());
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  bool _isLoading = false;
 
   ProfileScreen({super.key});
 
@@ -190,7 +198,7 @@ class ProfileScreen extends StatelessWidget {
             Divider(thickness: 1,),
           ListTile(
             onTap: (){
-              Get.off(LoginScreen());
+              _signOut();
             },
             leading: Image.asset('assets/images/logout.png', height: 20 ,),
             title: const Text('Log Out' , style: AppTextStyles.headlineMedium,),
@@ -203,5 +211,29 @@ class ProfileScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+  _signOut() async {
+
+
+    APIResponse result = await authenticationService.logout();
+
+
+
+    if (!result.error) {
+      await showToast("Logged out successfully");
+
+      Get.off(LoginScreen());
+    } else {
+      showToast(result.errorMessage!);
+    }
+  }
+
+  showToast(String msg) {
+    Fluttertoast.showToast(
+        msg: msg,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER,
+        textColor: AppColors.primaryColor,
+        fontSize: 16.0);
   }
 }

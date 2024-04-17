@@ -3,11 +3,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
 
 
 import '../../core/utils/colors.dart';
 import '../../core/utils/styles.dart';
+import '../../models/api_response.dart';
+import '../../services/authentication_service.dart';
+import '../auth/login/login_screen.dart';
 import 'home_controller.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,6 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
   final _advancedDrawerController = AdvancedDrawerController();
   final HomeController controller = Get.put(HomeController());
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+
+  AuthenticationService get authenticationService =>
+      GetIt.I<AuthenticationService>();
 
 
   @override
@@ -298,7 +307,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Spacer(),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    _signOut();
+                  },
                   leading: Image.asset('assets/images/logout.png', height: 24 , width: 24, color: AppColors.whiteColor,),
                   title: Text('LogOut', style: AppTextStyles.drawerTitle,),
                 ),
@@ -309,6 +320,32 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+  showToast(String msg) {
+    Fluttertoast.showToast(
+        msg: msg,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER,
+        textColor: AppColors.primaryColor,
+        fontSize: 16.0);
+  }
+
+  _signOut() async {
+
+
+    APIResponse result = await authenticationService.logout();
+
+
+
+    if (!result.error) {
+      await showToast("Logged out successfully");
+
+
+
+      Get.off(LoginScreen());
+    } else {
+      showToast(result.errorMessage!);
+    }
   }
 
   void _handleMenuButtonPressed() {

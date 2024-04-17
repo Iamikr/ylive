@@ -18,6 +18,7 @@ class AuthenticationService {
 
   Future logout() async {
     try {
+      await FirebaseAuth.instance.signOut();
       return APIResponse<bool>(
         error: false,
       );

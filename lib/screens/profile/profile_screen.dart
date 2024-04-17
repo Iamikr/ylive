@@ -8,6 +8,7 @@ import 'package:skincare/screens/profile/profile_controller.dart';
 import '../../core/utils/colors.dart';
 import '../../core/utils/styles.dart';
 import '../auth/login/login_screen.dart';
+import '../friends/firend_profile.dart';
 
 
 
@@ -51,7 +52,7 @@ class ProfileScreen extends StatelessWidget {
                 child: Center(
                   child: CircleAvatar(
                     radius: 50,
-                    backgroundImage: NetworkImage(user?.photoURL ?? ''),
+                    backgroundImage: NetworkImage(user?.photoURL ?? 'https://cdn-icons-png.freepik.com/256/3135/3135715.png?semt=ais_hybrid'),
                   ),
                 ),
               ),
@@ -59,9 +60,9 @@ class ProfileScreen extends StatelessWidget {
           ),
           SizedBox(height: Get.height * 0.04,),
 
-           Center(child: Text(user?.displayName! ?? '', style: AppTextStyles.headlineSmall,)),
+           Center(child: Text(user?.displayName ?? 'Name', style: AppTextStyles.headlineSmall,)),
           Center(
-            child: Text(user?.email! ?? '' , style: AppTextStyles.headlineSmall.copyWith(
+            child: Text(user?.email ?? 'Emails' , style: AppTextStyles.headlineSmall.copyWith(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
                 color: AppColors.blackColor.withOpacity(0.5)
@@ -151,22 +152,27 @@ class ProfileScreen extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
 
                       itemBuilder: (context, index){
-                        return Padding(
-                          padding: const EdgeInsets.only(
-                              left: 10,
-                              right: 10
+                        return GestureDetector(
+                          onTap: (){
+                            Get.to(const FriendProfileScreen());
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 10,
+                                right: 10
 
-                          ),
-                          child: Column(
-                            children: [
-                              CircleAvatar(
-                                radius: 30,
-                                backgroundImage: AssetImage(controller.friendsImages[index]), // Replace this with your image
-                              ),
-                              SizedBox(height: 10,),
-                                Text(controller.friendsNames[index] , style: AppTextStyles.headlineMedium,),
+                            ),
+                            child: Column(
+                              children: [
+                                CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage: AssetImage(controller.friendsImages[index]), // Replace this with your image
+                                ),
+                                SizedBox(height: 10,),
+                                  Text(controller.friendsNames[index] , style: AppTextStyles.headlineMedium,),
 
-                            ],
+                              ],
+                            ),
                           ),
                         );
                       }),

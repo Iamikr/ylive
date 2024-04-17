@@ -6,6 +6,7 @@ import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
+import 'package:skincare/screens/profile/profile_screen.dart';
 
 
 import '../../core/utils/colors.dart';
@@ -276,7 +277,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                     
+                  },
                   leading: Image.asset('assets/images/profile.png', height: 24 , width: 24),
                   title: Text('Profile', style: AppTextStyles.drawerTitle,),
                 ),

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
 import 'package:skincare/core/utils/colors.dart';
+import 'package:skincare/screens/home/home_screen.dart';
 
 import '../../../../components/custom_button.dart';
 import '../../../../components/custom_form_field.dart';
 import '../../../../constant.dart';
 import '../../../../core/utils/styles.dart';
+import '../../../../models/api_response.dart';
+import '../../../../services/authentication_service.dart';
 import '../../../dashboard/dashboard_screen.dart';
 
 
@@ -18,21 +23,30 @@ class SignUpForm extends StatefulWidget {
 
 class _SignFormState extends State<SignUpForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late String email;
-  late String password;
+   TextEditingController email  = TextEditingController();
+   TextEditingController password = TextEditingController();
+   TextEditingController name = TextEditingController();
   bool remember = false;
   bool _isLoading = false;
   final List<String> errors = [];
+  AuthenticationService get authenticationService =>
+      GetIt.I<AuthenticationService>();
 
 
 
   void addError({required String error}) {
     if (!errors.contains(error)) {
-      setState(() {
-        errors.add(error);
+      // Delay the addition of error to the errors list
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+        if (mounted) { // Check if the widget is still mounted
+          setState(() {
+            errors.add(error);
+          });
+        }
       });
     }
   }
+
 
   void removeError({required String error}) {
     if (errors.contains(error)) {
@@ -44,14 +58,8 @@ class _SignFormState extends State<SignUpForm> {
 
   @override
   Widget build(BuildContext context) {
-    return _isLoading
-        ? const Scaffold(
-      backgroundColor: AppColors.backgroundColor,
-      body: Center(
-        child: CircularProgressIndicator(),
-      ),
-    )
-        :  Form(
+    return Form(
+      key: _formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -96,8 +104,10 @@ class _SignFormState extends State<SignUpForm> {
               height: Get.height * 0.02,
             ),
             CustomButtonWidget(
+              isLoading: _isLoading,
                 onTap: () {
-                  Get.to(() => const Dashboard());
+                  _signUp();
+
                 },
                 buttonText: 'Sign Up'),
             SizedBox(
@@ -109,10 +119,12 @@ class _SignFormState extends State<SignUpForm> {
 
   CustomFormField buildPasswordFormField() {
     return CustomFormField(
+      controller: password,
       isuffixIconPassword: true,
       hintText: 'Enter Password ',
       suffixIcon: Icon(Icons.visibility_off),
-      onFieldSubmitted: (newValue) => password = newValue!,
+
+      onFieldSubmitted: (newValue) => password.text = newValue!,
       onChange: (value) {
         if (value.isNotEmpty) {
           removeError(error: kPassNullError);
@@ -136,8 +148,15 @@ class _SignFormState extends State<SignUpForm> {
 
   CustomFormField buildEmailFormField() {
     return CustomFormField(
+      controller: email,
       keyboardType: TextInputType.emailAddress,
-      onFieldSubmitted: (newValue) => email = newValue,
+      onFieldSubmitted: (newValue) {
+        setState(() {
+          email.text = newValue;
+        });
+
+
+      },
       onChange: (value) {
         if (value.isNotEmpty) {
           removeError(error: kEmailNullError);
@@ -161,22 +180,24 @@ class _SignFormState extends State<SignUpForm> {
   }
   CustomFormField buildNameFormField() {
     return CustomFormField(
+      controller: name,
       keyboardType: TextInputType.name,
-      onFieldSubmitted: (newValue) => email = newValue,
+      onFieldSubmitted: (newValue) {
+        setState(() {
+          name.text = newValue;
+        });
+
+
+      },
       onChange: (value) {
         if (value.isNotEmpty) {
           removeError(error: kEmailNullError);
-        } else if (emailValidatorRegExp.hasMatch(value)) {
-          removeError(error: kInvalidEmailError);
         }
         return;
       },
       validator: (value) {
         if (value!.isEmpty) {
           addError(error: kEmailNullError);
-          return "";
-        } else if (!emailValidatorRegExp.hasMatch(value)) {
-          addError(error: kInvalidEmailError);
           return "";
         }
         return null;
@@ -185,33 +206,36 @@ class _SignFormState extends State<SignUpForm> {
     );
   }
 
-// _signIn() async {
-//   setState(() {
-//     _isLoading = true;
-//   });
-//
-//  // final result = await authenticationService.signInWithEmail(email, password);
-//
-//   setState(() {
-//     _isLoading = false;
-//   });
-//
-//   if (!result.error) {
-//     showToast("Login successful");
-//     Navigator.pushNamed(context, HomeScreen.routeName);
-//   } else {
-//     showToast(result.errorMessage!);
-//   }
-// }
+Future _signUp() async {
+  setState(() {
+    _isLoading = true;
+  });
 
-// showToast(String msg) {
-//   Fluttertoast.showToast(
-//     msg: msg,
-//     toastLength: Toast.LENGTH_LONG,
-//     gravity: ToastGravity.CENTER,
-//     textColor: Colors.white,
-//     backgroundColor: kPrimaryColor,
-//     fontSize: 16.0,
-//   );
-// }
+  final result = await authenticationService.signUpWithEmail(email.text, password.text,name.text);
+
+  setState(() {
+    _isLoading = false;
+  });
+
+  if (!result.error) {
+    showToast("Login successful");
+    Get.to(Dashboard());
+  } else {
+    var result;
+    showToast(result.errorMessage!);
+  }
+}
+
+
+
+showToast(String msg) {
+  Fluttertoast.showToast(
+    msg: msg,
+    toastLength: Toast.LENGTH_LONG,
+    gravity: ToastGravity.CENTER,
+    textColor: Colors.white,
+    backgroundColor: AppColors.primaryColor,
+    fontSize: 16.0,
+  );
+}
 }

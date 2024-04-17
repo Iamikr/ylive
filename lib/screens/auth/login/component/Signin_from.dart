@@ -22,21 +22,20 @@ class SignForm extends StatefulWidget {
 
 class _SignFormState extends State<SignForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late String email = "a@a.com";
-  late String password = "12345678";
+  // late String email = "";
+  // late String password = "12345678";
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   bool remember = false;
-  late bool _isLoading;
+    bool _isLoading = false;
   final List<String> errors = [];
   late Future<bool> _signInFuture;
 
   AuthenticationService get authenticationService =>
       GetIt.I<AuthenticationService>();
 
-  @override
-  void initState() {
-    _isLoading = false;
-    super.initState();
-  }
+
 
   void addError({required String error}) {
     if (!errors.contains(error)) {
@@ -64,7 +63,7 @@ class _SignFormState extends State<SignForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
+      child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Padding(
@@ -121,16 +120,19 @@ class _SignFormState extends State<SignForm> {
             height: Get.height * 0.02,
           ),
           CustomButtonWidget(
-            isLoading: _isLoading,
-            onTap: () {
+          isLoading: _isLoading,
 
+            onTap: () {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
+
+
                 _signInFuture = _signIn();
 
               }
             },
             buttonText: 'Sign In',
+
           ),
           SizedBox(
             height: Get.height * 0.02,
@@ -142,11 +144,12 @@ class _SignFormState extends State<SignForm> {
 
   CustomFormField buildPasswordFormField() {
     return CustomFormField(
+      controller: passwordController,
       isuffixIconPassword: true,
       hintText: 'Enter Password ',
       suffixIcon: Icon(Icons.visibility_off),
 
-      onFieldSubmitted: (newValue) => password = newValue!,
+      onFieldSubmitted: (newValue) => passwordController.text = newValue!,
       onChange: (value) {
         if (value.isNotEmpty) {
           removeError(error: kPassNullError);
@@ -170,10 +173,11 @@ class _SignFormState extends State<SignForm> {
 
   CustomFormField buildEmailFormField() {
     return CustomFormField(
+      controller: emailController,
       keyboardType: TextInputType.emailAddress,
       onFieldSubmitted: (newValue) {
         setState(() {
-          email = newValue;
+          emailController.text = newValue;
         });
 
 
@@ -201,9 +205,14 @@ class _SignFormState extends State<SignForm> {
   }
 
   Future<bool> _signIn() async {
+    String email = emailController.text;
+    String password = passwordController.text;
+
     setState(() {
-      _isLoading = true; // Set loading to true when sign-in starts
+      _isLoading = true;
     });
+
+
     final result = await authenticationService.signInWithEmail(email, password);
     setState(() {
       _isLoading = false;

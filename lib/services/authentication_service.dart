@@ -28,7 +28,7 @@ class AuthenticationService {
   }
 
 //signup with email
-  Future signUpWithEmail(String email, String password) async {
+  Future signUpWithEmail(String email, String password,String displayName) async {
     try {
       var authResult = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -38,7 +38,7 @@ class AuthenticationService {
         return APIResponse<UserDetails>(
           error: false,
           data: UserDetails.optional(
-              uid: user.uid, displayName: user.displayName, email: user.email),
+              uid: user.uid, displayName: displayName, email: user.email),
         );
       } else {
         return APIResponse<bool>(

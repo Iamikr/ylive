@@ -64,14 +64,7 @@ class _SignFormState extends State<SignForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: _isLoading
-          ? const Scaffold(
-        backgroundColor: AppColors.backgroundColor,
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      )
-          : Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Padding(
@@ -128,13 +121,13 @@ class _SignFormState extends State<SignForm> {
             height: Get.height * 0.02,
           ),
           CustomButtonWidget(
+            isLoading: _isLoading,
             onTap: () {
+
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 _signInFuture = _signIn();
-                // setState(() {
-                //   _isLoading = true;
-                // });
+
               }
             },
             buttonText: 'Sign In',
@@ -208,6 +201,9 @@ class _SignFormState extends State<SignForm> {
   }
 
   Future<bool> _signIn() async {
+    setState(() {
+      _isLoading = true; // Set loading to true when sign-in starts
+    });
     final result = await authenticationService.signInWithEmail(email, password);
     setState(() {
       _isLoading = false;

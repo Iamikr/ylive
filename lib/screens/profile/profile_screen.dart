@@ -59,7 +59,7 @@ class ProfileScreen extends StatelessWidget {
                 child: Center(
                   child: CircleAvatar(
                     radius: 50,
-                    backgroundImage: NetworkImage(user?.photoURL ?? ''),
+                    backgroundImage: NetworkImage(user?.photoURL ?? 'https://cdn-icons-png.freepik.com/256/3135/3135715.png?semt=ais_hybrid'),
                   ),
                 ),
               ),
@@ -67,9 +67,9 @@ class ProfileScreen extends StatelessWidget {
           ),
           SizedBox(height: Get.height * 0.04,),
 
-           Center(child: Text(user?.displayName! ?? '', style: AppTextStyles.headlineSmall,)),
+           Center(child: Text(user?.displayName ?? '', style: AppTextStyles.headlineSmall,)),
           Center(
-            child: Text(user?.email! ?? '' , style: AppTextStyles.headlineSmall.copyWith(
+            child: Text(user?.email ?? '' , style: AppTextStyles.headlineSmall.copyWith(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
                 color: AppColors.blackColor.withOpacity(0.5)

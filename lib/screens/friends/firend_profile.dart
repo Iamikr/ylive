@@ -22,39 +22,22 @@ class FriendProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
      return   Scaffold(
       backgroundColor: AppColors.backgroundColor,
+      appBar: AppBar(),
       body: ListView(
+        padding: EdgeInsets.only(
+          top: 20
+        ),
 
         children: [
 
 
 
-          Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Container(
-                height: Get.height * 0.25,
-                width: Get.width ,
-                decoration: const BoxDecoration(
-                    color: AppColors.primaryColor,
-
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(160),
-                      bottomRight: Radius.circular(160),
-                    )
-                ),
-              ),
-              Positioned(
-                bottom: -20,
-                right: Get.width * 0.38,
-                child: Center(
-                  child: CircleAvatar(
-                    radius: 50,
-                    backgroundImage:
-                    NetworkImage( 'https://cdn-icons-png.freepik.com/256/3135/3135715.png?semt=ais_hybrid'),
-                  ),
-                ),
-              ),
-            ],
+          Center(
+            child: CircleAvatar(
+              radius: 50,
+              backgroundImage:
+              NetworkImage( 'https://cdn-icons-png.freepik.com/256/3135/3135715.png?semt=ais_hybrid'),
+            ),
           ),
           SizedBox(height: Get.height * 0.04,),
 

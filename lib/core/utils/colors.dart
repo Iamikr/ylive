@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 class AppColors{
 
   static const Color bgColor = Color(0xffFAFAFA);
-  static const Color backgroundColor = Color(0xffF7F7F7);
+  static const Color backgroundColor = Color(0xffc4e6ff);
   static const Color whiteColor = Color(0xFFFFFFFF);
   static  Color iconColor = Colors.black.withOpacity(0.4);
-  static const Color primaryColor = Color(0xffFEA500);
-  static const Color buttonColor = Color(0xffDDB750);
+  //static const Color primaryColor = Color(0xffFEA500);
+  static const Color primaryColor = Color(0xff3b90c7);
+  static const Color buttonColor = Color(0xff3b90c7);
   static  const Color blackColor = Color(0xff000000);
   static const Color containerColor = Color(0xffEFEFEF);
 

@@ -12,7 +12,7 @@ import '../../core/utils/styles.dart';
 import '../../models/api_response.dart';
 import '../../services/authentication_service.dart';
 import '../auth/login/login_screen.dart';
-import '../friends/firend_profile.dart';
+import '../edit_profile/edit_profile_screen.dart';
 
 
 
@@ -162,7 +162,7 @@ class ProfileScreen extends StatelessWidget {
                       itemBuilder: (context, index){
                         return GestureDetector(
                           onTap: (){
-                            Get.to(const FriendProfileScreen());
+                          //  Get.to(const FriendProfileScreen());
                           },
                           child: Padding(
                             padding: const EdgeInsets.only(
@@ -191,6 +191,9 @@ class ProfileScreen extends StatelessWidget {
           SizedBox(height: Get.height * 0.04,),
 
           ListTile(
+            onTap: (){
+              Get.to(const EditProfileScreen());
+            },
             leading: Image.asset('assets/images/editprofile.png', height: 20 ,),
             title: const Text('Edit profile' , style: AppTextStyles.headlineMedium,),
 

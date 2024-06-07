@@ -34,7 +34,7 @@ class CustomFormField extends StatefulWidget {
   final void Function()? onEditingComplete;
   final String? intialValue;
   final String hintText;
-  final String? prefixIcon;
+  final Widget? prefixIcon;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final Widget? suffixIcon;
@@ -95,19 +95,13 @@ class _CustomTextFieldState extends State<CustomFormField> {
       validator: widget.validator,
       decoration: InputDecoration(
         helperMaxLines: widget.hintMaxLines ?? 1,
-        contentPadding: const EdgeInsets.only(left: 16, right: 16, top: 16),
+        contentPadding: const EdgeInsets.only(left: 16, right: 16, top: 20 , bottom: 20),
         alignLabelWithHint: true,
         prefixIcon: widget.prefixIcon == null
             ? null
             : Padding(
           padding: const EdgeInsets.only(left: 16, right: 16),
-          child: Image.asset(
-            widget.prefixIcon!,
-            height: 20,
-            width: 20,
-            color: widget.prefixIconColor ?? AppColors.primaryColor,
-            fit: BoxFit.contain,
-          ),
+          child: widget.prefixIcon,
         ),
         suffixIcon: widget.isuffixIconPassword == true
             ? GestureDetector(
@@ -118,39 +112,39 @@ class _CustomTextFieldState extends State<CustomFormField> {
               obscureText
                   ? Icons.visibility_off_outlined
                   : Icons.visibility_outlined,
-              color: AppColors.primaryColor,
+              color: AppColors.buttonColor,
               size: 20,
             ),
           ),
         )
             : widget.suffixIcon,
         counterText: '',
-        fillColor: widget.fillColor ?? AppColors.backgroundColor,
+        fillColor: widget.fillColor ?? AppColors.whiteColor,
         filled: true,
         hintText: widget.hintText,
         hintStyle: AppTextStyles.title,
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: widget.borderRadius ?? BorderRadius.circular(50),
+          borderRadius: widget.borderRadius ?? BorderRadius.circular(20),
           borderSide: BorderSide(
             color: widget.borderColor ?? AppColors.hintColor,
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: widget.borderRadius ?? BorderRadius.circular(50),
+          borderRadius: widget.borderRadius ?? BorderRadius.circular(20),
           borderSide: BorderSide(
-            color: widget.borderColor ?? AppColors.hintColor,
+            color: widget.borderColor ?? Colors.transparent,
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: widget.borderRadius ?? BorderRadius.circular(50),
+          borderRadius: widget.borderRadius ?? BorderRadius.circular(20),
           borderSide: BorderSide(
-            color: widget.borderColor ?? AppColors.hintColor,
+            color: widget.borderColor ?? Colors.transparent,
           ),
         ),
         border: OutlineInputBorder(
-          borderRadius: widget.borderRadius ?? BorderRadius.circular(50),
+          borderRadius: widget.borderRadius ?? BorderRadius.circular(20),
           borderSide: BorderSide(
-            color: widget.borderColor ?? AppColors.textFieldBorderColor,
+            color: widget.borderColor ??Colors.transparent,
           ),
         ),
       ),

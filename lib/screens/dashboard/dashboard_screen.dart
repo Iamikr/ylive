@@ -47,7 +47,7 @@ class _DashboardState extends State<Dashboard> {
             });
           },
           children:   [
-            HomeScreen(),
+            const HomeScreen(),
             HomeScreen(),
             HomeScreen(),
               ProfileScreen(),
@@ -61,43 +61,49 @@ class _DashboardState extends State<Dashboard> {
             pageController.jumpToPage(index);
             setState(() {});
           },
-          backgroundColor: Color(0xffFEA500),
+          backgroundColor: AppColors.backgroundColor,
           type: BottomNavigationBarType.fixed,
           showSelectedLabels: true,
           showUnselectedLabels: true,
           selectedItemColor: AppColors.whiteColor,
-          unselectedItemColor: AppColors.greyD0,
+          unselectedItemColor: AppColors.primaryColor,
           selectedLabelStyle:
           AppTextStyles.bodySmall.copyWith(color: AppColors.primaryColor),
           unselectedLabelStyle: AppTextStyles.bodySmall,
           items: [
             BottomNavigationBarItem(
-              icon: const ImageIcon(
-                AssetImage('assets/images/home.png'),
-                size: 24,
+              icon: Padding(
+                padding: const EdgeInsets.only(
+                  top: 6
+
+                ),
+                child: const ImageIcon(
+                  AssetImage('assets/images/home.png'),
+                  size: 28,
+                ),
               ),
-              label: 'Home',
+              label: '',
             ),
             BottomNavigationBarItem(
               icon: const ImageIcon(
                 AssetImage('assets/images/shop.png'),
                 size: 24,
               ),
-              label: 'Shop',
+              label: '',
             ),
             BottomNavigationBarItem(
               icon: const ImageIcon(
                 AssetImage('assets/images/search.png'),
                 size: 24,
               ),
-              label: 'Search',
+              label: '',
             ),
             BottomNavigationBarItem(
               icon: const ImageIcon(
                 AssetImage('assets/images/profile.png'),
                 size: 24,
               ),
-              label: 'Profile',
+              label: '',
             ),
           ],
         ));

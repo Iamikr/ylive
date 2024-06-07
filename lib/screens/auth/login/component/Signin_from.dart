@@ -13,6 +13,9 @@ import '../../../home/home_screen.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../forgot_password/forgot_password.dart';
+import '../../verfication/verification.dart';
+
 class SignForm extends StatefulWidget {
   const SignForm({Key? key}) : super(key: key);
 
@@ -66,61 +69,44 @@ class _SignFormState extends State<SignForm> {
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(bottom: 10),
-            child: Text(
-              'Email',
-              style: AppTextStyles.title,
-            ),
-          ),
+
           buildEmailFormField(),
           SizedBox(
             height: Get.height * 0.02,
           ),
-          const Padding(
-            padding: EdgeInsets.only(bottom: 10),
-            child: Text(
-              'Password',
-              style: AppTextStyles.title,
-            ),
-          ),
+
           buildPasswordFormField(),
           SizedBox(
             height: Get.height * 0.02,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Checkbox(
-                    activeColor: AppColors.primaryColor,
-                    value: remember,
-                    onChanged: (value) {
-                      // setState(() {
-                      //   remember = value!;
-                      // });
-                    },
+          Padding(
+            padding: const EdgeInsets.only(
+              right: 10
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+
+                GestureDetector(
+                  onTap: () {
+                    Get.to(const ForgotPasswordScreen());
+                  },
+                  child:   Text(
+                    'Forgot password?',
+                    style: AppTextStyles.title..copyWith(
+                      color: AppColors.buttonColor
+                    ),
                   ),
-                  const Text('Remember Me', style: AppTextStyles.title),
-                ],
-              ),
-              GestureDetector(
-                onTap: () {
-                  //Get.to(const ForgotPasswordScreen());
-                },
-                child: const Text(
-                  'Forgot password',
-                  style: AppTextStyles.title,
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
           SizedBox(
             height: Get.height * 0.02,
           ),
           CustomButtonWidget(
           isLoading: _isLoading,
+            buttonColor: AppColors.buttonColor,
 
             onTap: () {
               if (_formKey.currentState!.validate()) {
@@ -147,7 +133,8 @@ class _SignFormState extends State<SignForm> {
       controller: passwordController,
       isuffixIconPassword: true,
       hintText: 'Enter Password ',
-      suffixIcon: Icon(Icons.visibility_off),
+      prefixIcon: const Icon(Icons.lock, color: AppColors.buttonColor,),
+      suffixIcon: const Icon(Icons.visibility_off,color: AppColors.buttonColor,),
 
       onFieldSubmitted: (newValue) => passwordController.text = newValue!,
       onChange: (value) {
@@ -175,6 +162,7 @@ class _SignFormState extends State<SignForm> {
     return CustomFormField(
       controller: emailController,
       keyboardType: TextInputType.emailAddress,
+      prefixIcon: const Icon(Icons.person_3_outlined, color: AppColors.buttonColor,),
       onFieldSubmitted: (newValue) {
         setState(() {
           emailController.text = newValue;

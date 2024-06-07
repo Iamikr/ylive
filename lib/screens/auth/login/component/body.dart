@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:skincare/core/utils/assets_constant.dart';
 
 import '../../../../components/custom_button.dart';
 import '../../../../components/custom_form_field.dart';
@@ -70,23 +71,48 @@ class _BodyState extends State<SignInBody> {
       backgroundColor: AppColors.backgroundColor,
       body: ListView(
         padding:
-            const EdgeInsets.only(top: 60, right: 20, left: 20, bottom: 50),
+            const EdgeInsets.only(top: 30, right: 20, left: 20, bottom: 50),
         children: [
+          SizedBox(
+            height: Get.height * 0.06,
+          ),
+          
+          Center(
+            child: SizedBox(
+              height: Get.height * 0.2,
+              width: Get.width * 0.2,
+              child: Image.asset(AppAssets.logo, fit: BoxFit.cover,),
+            ),
+          ),
+
+          SizedBox(
+            height: Get.height * 0.02,
+          ),
+          Center(
+            child: const Text(
+              'Welcome to Vaccination',
+              style: AppTextStyles.loginHeadLine,
+            ),
+          ),
+
+
+
+
+
+
+          SizedBox(
+            height: Get.height * 0.02,
+          ),
+          //form
+          SignForm(),
           SizedBox(
             height: Get.height * 0.02,
           ),
           const Text(
-            'Welcome to MyYearLive!',
-            style: AppTextStyles.headlineSmall,
+            'Or Connect With ',
+            style: AppTextStyles.bodySmall,
+            textAlign: TextAlign.center,
           ),
-          Text(
-            'Connect with your school memories.',
-            style: AppTextStyles.headlineSmall.copyWith(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: AppColors.blackColor.withOpacity(0.5)),
-          ),
-
           SizedBox(
             height: Get.height * 0.04,
           ),
@@ -97,7 +123,7 @@ class _BodyState extends State<SignInBody> {
                   height: Get.height * 0.07,
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                      color: AppColors.boxColor,
+                      color: AppColors.whiteColor,
                       borderRadius: BorderRadius.circular(25)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -126,64 +152,50 @@ class _BodyState extends State<SignInBody> {
 
                       await _handleSignIn();
 
-    },
-                  child: Container(
-                    height: Get.height * 0.07,
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        color: AppColors.boxColor,
-                        borderRadius: BorderRadius.circular(25)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                    },
+                    child: Container(
+                      height: Get.height * 0.07,
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          color: AppColors.whiteColor,
+                          borderRadius: BorderRadius.circular(25)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
 
-                        Image.asset(
-                          'assets/images/google.png',
-                          height: 30,
-                          width: 30,
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Text(
-                            'Google',
-                            style: AppTextStyles.title,
+                          Image.asset(
+                            'assets/images/google.png',
+                            height: 30,
+                            width: 30,
                           ),
-                        )
-                      ],
+                          const Padding(
+                            padding: EdgeInsets.only(left: 10),
+                            child: Text(
+                              'Google',
+                              style: AppTextStyles.title,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-              ),
             ],
           ),
 
-          SizedBox(
-            height: Get.height * 0.02,
-          ),
-
-          const Text(
-            'Or Connect With ',
-            style: AppTextStyles.bodySmall,
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(
-            height: Get.height * 0.02,
-          ),
-          //form
-          SignForm(),
 
           // end of from
 
           SizedBox(
-            height: Get.height * 0.02,
+            height: Get.height * 0.04,
           ),
 
           Align(
             alignment: Alignment.center,
             child: RichText(
               text: TextSpan(
-                  text: "Do not have account ? ",
+                  text: "Not Registered ? ",
                   style: AppTextStyles.title,
                   children: [
                     TextSpan(

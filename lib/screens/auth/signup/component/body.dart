@@ -7,6 +7,7 @@ import 'package:skincare/screens/auth/signup/component/signup_form.dart';
 
 import '../../../../components/custom_button.dart';
 import '../../../../components/custom_form_field.dart';
+import '../../../../core/utils/assets_constant.dart';
 import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/styles.dart';
 import '../../../dashboard/dashboard_screen.dart';
@@ -27,21 +28,39 @@ class _BodyState extends State<SignUpBody> {
       backgroundColor: AppColors.backgroundColor,
       body: ListView(
         padding:
-        const EdgeInsets.only(top: 60, right: 20, left: 20, bottom: 50),
+        const EdgeInsets.only(top: 20, right: 20, left: 20, bottom: 50),
         children: [
+          SizedBox(
+            height: Get.height * 0.04,
+          ),
+
+
+          Center(
+            child: SizedBox(
+              height: Get.height * 0.2,
+              width: Get.width * 0.2,
+              child: Image.asset(AppAssets.logo, fit: BoxFit.cover,),
+            ),
+          ),
           SizedBox(
             height: Get.height * 0.02,
           ),
-          const Text(
-            'Welcome to MyYearLive!',
-            style: AppTextStyles.headlineSmall,
+          Center(
+            child:   Text(
+              'SIGN UP',
+              style: AppTextStyles.loginHeadLine.copyWith(
+                fontSize: 24
+              ),
+            ),
           ),
-          Text(
-            'Connect with your school memories.',
-            style: AppTextStyles.headlineSmall.copyWith(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: AppColors.blackColor.withOpacity(0.5)),
+          Center(
+            child: Text(
+              'PLease enter your information here.',
+              style: AppTextStyles.headlineSmall.copyWith(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.blackColor.withOpacity(0.5)),
+            ),
           ),
 
           SizedBox(
@@ -49,15 +68,7 @@ class _BodyState extends State<SignUpBody> {
           ),
 
 
-          SizedBox(
-            height: Get.height * 0.02,
-          ),
 
-          const Text(
-            'Create Your Account ',
-            style: AppTextStyles.bodySmall,
-            textAlign: TextAlign.start,
-          ),
           SizedBox(
             height: Get.height * 0.02,
           ),

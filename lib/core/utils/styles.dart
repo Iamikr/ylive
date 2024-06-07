@@ -24,16 +24,27 @@ class AppTextStyles {
     fontFamily: fontFamilyInter,
     color: Colors.black,
   );
-
+  static const loginHeadLine = TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 20,
+    fontFamily: fontFamilyInter,
+    color: AppColors.buttonColor,
+  );
   static const title = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: 12,
     fontFamily: fontFamilyInter,
     color: AppColors.titleColor,
   );
-  static const bodySemiBold = TextStyle(
+  static const smallPrimaryText = TextStyle(
     fontWeight: FontWeight.w500,
-    fontSize: 12,
+    fontSize: 14,
+    fontFamily: fontFamilyInter,
+    color: AppColors.buttonColor,
+  );
+  static const appBarText = TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 16,
     fontFamily: fontFamilyInter,
     color: Colors.black,
   );

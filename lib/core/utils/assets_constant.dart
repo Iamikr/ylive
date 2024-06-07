@@ -13,6 +13,15 @@ class  AppAssets {
   static const String home4 = 'assets/images/home4.png';
   static const String home5= 'assets/images/home5.png';
   static const String camera= 'assets/images/camera.png';
+  static const String vac1= 'assets/images/vaccine1.jpg';
+  static const String vac2= 'assets/images/vaccine2.jpg';
+  static const String child = 'assets/images/child.png';
+  static const String injection = 'assets/images/injection.png';
+  static const String injection2 = 'assets/images/injection2.png';
+  static const String baby = 'assets/images/baby.png';
+  static const String doctor = 'assets/images/doctor.png';
+  static const String calender = 'assets/images/calender.png';
+  static const String completed = 'assets/images/completed.png';
 
   ///icons
   static const String icGoogle = 'assets/icons/google.png';
